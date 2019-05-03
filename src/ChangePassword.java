@@ -216,9 +216,9 @@ PreparedStatement pst=null;
             {
                 con=Connect.ConnectDB();
                  String sql1= "update users set User_password= '" + Newpass + "' where Username= '" + uName + "' and User_password = '" + OldPass + "'";
-                 Statement stmt = con.createStatement();
-                 stmt.execute(sql1.toString());
-                 stmt.close();
+                try (Statement stmt = con.createStatement()) {
+                    boolean execute = stmt.execute(sql1);
+                }
                  JOptionPane.showMessageDialog(this,"Password Successfully Changed");
                  this.dispose();
                  return;
@@ -305,9 +305,9 @@ PreparedStatement pst=null;
             {
                 con=Connect.ConnectDB();
                  String sql1= "update users set User_password= '" + Newpass + "' where Username= '" + uName + "' and User_password = '" + OldPass + "'";
-                 Statement stmt = con.createStatement();
-                 stmt.execute(sql1.toString());
-                 stmt.close();
+                try (Statement stmt = con.createStatement()) {
+                    boolean execute = stmt.execute(sql1);
+                }
                  JOptionPane.showMessageDialog(this,"Password Successfully Changed");
                  this.dispose();
                  return;
