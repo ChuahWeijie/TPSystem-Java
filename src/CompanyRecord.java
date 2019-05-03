@@ -25,6 +25,7 @@ PreparedStatement pst=null;
         initComponents();
         setLocationRelativeTo(null);
         Get_Data();
+        
     }
 
     /**
