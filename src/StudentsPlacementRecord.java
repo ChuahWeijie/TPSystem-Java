@@ -192,6 +192,8 @@ try{
              frm.btnDelete.setEnabled(true);
              frm.btnSave.setEnabled(false);
 
+        }catch(RuntimeException e){
+            throw e;
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
