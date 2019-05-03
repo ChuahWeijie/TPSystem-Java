@@ -10,7 +10,6 @@
 import java.sql.*;
 import javax.swing.*;
 public class Connect {
-Connection con=null;
 public static Connection ConnectDB(){
     
                try{
