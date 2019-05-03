@@ -38,6 +38,7 @@ private void Reset()
     txtCompanyName.setText("");
     txtPlacementDate.setText("");
     txtPackage.setText("");
+    txtSalary.setText("");
     txtEnrollmentNo.setText("");
     txtStudentName.setText("");
     txtSession.setText("");
@@ -102,6 +103,8 @@ private void GetRecord(){
         jLabel4 = new javax.swing.JLabel();
         txtPlacementDate = new javax.swing.JFormattedTextField();
         jLabel30 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtSalary = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         btnNew = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -220,6 +223,10 @@ private void GetRecord(){
 
         jLabel30.setText("(DD/MM/YYYY)");
 
+        jLabel9.setText("Salary (RM)");
+
+        txtSalary.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -229,16 +236,25 @@ private void GetRecord(){
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel9))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtPlacementDate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel30))
-                    .addComponent(txtPackage, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtPlacementDate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel30))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPackage, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCompanyName, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +267,11 @@ private void GetRecord(){
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtPackage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtSalary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtPlacementDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -384,7 +404,7 @@ private void GetRecord(){
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,6 +460,10 @@ private void GetRecord(){
                 JOptionPane.showMessageDialog( this, "Please enter placement date","Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            if (txtSalary.getText().equals("")) {
+                JOptionPane.showMessageDialog( this, "Please enter salary","Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
            
             Statement stmt;
             stmt= con.createStatement();
@@ -450,7 +474,7 @@ private void GetRecord(){
                 return;
             }
 
-            String sql= "insert into StudentPlacement(ScholarNo,CompanyID,Package,PlacementDate)values('"+ txtScholarNo.getText() + "'," + txtCompanyID.getText() + "," + txtPackage.getText() + ",'" + txtPlacementDate.getText() + "')";
+            String sql= "insert into StudentPlacement(ScholarNo,CompanyID,Package,Salary,PlacementDate)values('"+ txtScholarNo.getText() + "'," + txtCompanyID.getText() + "," + txtPackage.getText() + "," + txtSalary.getText() + ",'" + txtPlacementDate.getText() + "')";
             pst=con.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(this,"Successfully saved","Record",JOptionPane.INFORMATION_MESSAGE);
@@ -463,7 +487,7 @@ private void GetRecord(){
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try{
             con=Connect.ConnectDB();
-            String sql= "update StudentPlacement set ScholarNo='"+ txtScholarNo.getText() + "',CompanyID=" + txtCompanyID.getText() + ",Package=" + txtPackage.getText() + ",PlacementDate='" + txtPlacementDate.getText() + "' where ID=" + txtID.getText() + "";
+            String sql= "update StudentPlacement set ScholarNo='"+ txtScholarNo.getText() + "',CompanyID=" + txtCompanyID.getText() + ",Package=" + txtPackage.getText() + ",Salary=" + txtSalary.getText()  + ",PlacementDate='" + txtPlacementDate.getText() + "' where ID=" + txtID.getText() + "";
             pst=con.prepareStatement(sql);
             pst.execute();
             JOptionPane.showMessageDialog(this,"Successfully updated","Record",JOptionPane.INFORMATION_MESSAGE);
@@ -583,6 +607,7 @@ private void GetRecord(){
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     public javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -598,6 +623,7 @@ private void GetRecord(){
     public javax.swing.JTextField txtID;
     public javax.swing.JTextField txtPackage;
     public javax.swing.JFormattedTextField txtPlacementDate;
+    public javax.swing.JFormattedTextField txtSalary;
     public javax.swing.JTextField txtScholarNo;
     public javax.swing.JTextField txtSession;
     public javax.swing.JTextField txtStudentName;

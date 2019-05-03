@@ -132,7 +132,7 @@ PreparedStatement pst=null;
 private void Get_data()
 {
       con=Connect.ConnectDB();
- String sql= "select ID,Student.ScholarNo as 'Scholar No',EnrollmentNo as 'Enrollment No',StudentName as 'Student Name',Session,Coursename as 'Course',Branch,Company.CompanyID as 'Company ID',Companyname as 'Company',Package,PlacementDate as 'Placement Date' from Company,Student,StudentPlacement,Course where Company.CompanyID=StudentPlacement.CompanyID and StudentPlacement.ScholarNo=Student.ScholarNo and Student.CourseID = Course.CourseID order by StudentName";
+ String sql= "select ID,Student.ScholarNo as 'Scholar No',EnrollmentNo as 'Enrollment No',StudentName as 'Student Name',Session,Coursename as 'Course',Branch,Company.CompanyID as 'Company ID',Companyname as 'Company',Package,Salary,PlacementDate as 'Placement Date' from Company,Student,StudentPlacement,Course where Company.CompanyID=StudentPlacement.CompanyID and StudentPlacement.ScholarNo=Student.ScholarNo and Student.CourseID = Course.CourseID order by StudentName";
 try{
           pst=con.prepareStatement(sql);
           rs= pst.executeQuery();
@@ -143,7 +143,7 @@ try{
 }
     private void txtStudentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStudentNameActionPerformed
         con=Connect.ConnectDB();
-       String sql= "select ID,Student.ScholarNo as 'Scholar No',EnrollmentNo as 'Enrollment No',StudentName as 'Student Name',Session,Coursename as 'Course',Branch,Company.CompanyID as 'Company ID',Companyname as 'Company',Package,PlacementDate as 'Placement Date' from Company,Student,StudentPlacement,Course where Company.CompanyID=StudentPlacement.CompanyID and StudentPlacement.ScholarNo=Student.ScholarNo and Student.CourseID = Course.CourseID and CourseName like '" + txtStudentName.getText() + "%' order by StudentName";
+       String sql= "select ID,Student.ScholarNo as 'Scholar No',EnrollmentNo as 'Enrollment No',StudentName as 'Student Name',Session,Coursename as 'Course',Branch,Company.CompanyID as 'Company ID',Companyname as 'Company',Package,Salary,PlacementDate as 'Placement Date' from Company,Student,StudentPlacement,Course where Company.CompanyID=StudentPlacement.CompanyID and StudentPlacement.ScholarNo=Student.ScholarNo and Student.CourseID = Course.CourseID and CourseName like '" + txtStudentName.getText() + "%' order by StudentName";
         try{
             pst=con.prepareStatement(sql);
             rs= pst.executeQuery();
@@ -187,13 +187,13 @@ try{
               String add9= jTable1.getModel().getValueAt(row,9).toString();
                frm.txtPackage.setText(add9);
               String add10= jTable1.getModel().getValueAt(row,10).toString();
-             frm.txtPlacementDate.setText(add10);
+             frm.txtSalary.setText(add10);
+             String add11= jTable1.getModel().getValueAt(row,11).toString();
+             frm.txtPlacementDate.setText(add11);
              frm.btnUpdate.setEnabled(true);
              frm.btnDelete.setEnabled(true);
              frm.btnSave.setEnabled(false);
 
-        }catch(RuntimeException e){
-            throw e;
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }

@@ -146,7 +146,7 @@ PreparedStatement pst=null;
 private void Get_data()
 {
       con=Connect.ConnectDB();
- String sql= "select Student.ScholarNo as 'Scholar No',EnrollmentNo as 'Enrollment No',StudentName as 'Student Name',Session,Coursename as 'Course',Branch,Companyname as 'Company',Package,PlacementDate as 'Placement Date' from Company,Student,StudentPlacement,Course where Company.CompanyID=StudentPlacement.CompanyID and StudentPlacement.ScholarNo=Student.ScholarNo and Student.CourseID = Course.CourseID order by StudentName";
+ String sql= "select Student.ScholarNo as 'Scholar No',EnrollmentNo as 'Enrollment No',StudentName as 'Student Name',Session,Coursename as 'Course',Branch,Companyname as 'Company',Package,Salary,PlacementDate as 'Placement Date' from Company,Student,StudentPlacement,Course where Company.CompanyID=StudentPlacement.CompanyID and StudentPlacement.ScholarNo=Student.ScholarNo and Student.CourseID = Course.CourseID order by StudentName";
 try{
           pst=con.prepareStatement(sql);
           rs= pst.executeQuery();
