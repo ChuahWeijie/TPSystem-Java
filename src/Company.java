@@ -9,10 +9,6 @@ import java.sql.Statement;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
